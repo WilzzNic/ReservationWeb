@@ -24,6 +24,7 @@ Route::group(['middleware' => 'jwt.auth'], function() {
     Route::get('profile', 'API\APIProfileController@custProfile');
     Route::get('restaurants', 'API\APIRestaurantListController@index');
     Route::get('restaurants/{restaurant}', 'API\APIRestaurantListController@restaurantProfile');
+    Route::get('restaurants/{restaurant}/profile', 'API\APIOrderController@index');
 });
 
 // Route::resource('restaurants', 'RestaurantListController')->except(['create', 'edit']);
