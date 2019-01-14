@@ -34,6 +34,13 @@ class UsersTableSeeder extends Seeder
                 'role' => 'Customer',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'username' => 'KFC_is_the_best',
+                'password' => bcrypt('secret'),
+                'role' => 'Restaurant',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ]);
         

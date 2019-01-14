@@ -25,6 +25,12 @@ class SchedulesTableSeeder extends Seeder
                 'time_provided'     => '08:00:00',
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
+            ],
+            [
+                'rest_id'           => '2',
+                'time_provided'     => '12:00:00',
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
             ]
         ]);
     }

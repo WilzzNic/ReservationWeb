@@ -15,11 +15,11 @@ class CreateOrderTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('customer_id'); 
             $table->integer('table_id');
             $table->integer('schedule_id');
             $table->string('status');
-            $table->dateTime('reservation_date');
+            $table->date('reservation_date');
             $table->dateTime('date_ordered');
         });
     }

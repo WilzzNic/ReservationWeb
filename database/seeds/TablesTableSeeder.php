@@ -19,7 +19,6 @@ class TablesTableSeeder extends Seeder
                 'rest_id'           => '1',
                 'table_type'        => 2,
                 'total_table'       => 10,
-                'total_reserved'    => 5,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
             ],
@@ -27,7 +26,13 @@ class TablesTableSeeder extends Seeder
                 'rest_id'           => '1',
                 'table_type'        => 4,
                 'total_table'       => 5,
-                'total_reserved'    => 5,
+                'created_at'        => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
+            [
+                'rest_id'           => '2',
+                'table_type'        => 4,
+                'total_table'       => 20,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
             ]

@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    CONST ORDER_PENDING = "Pending";
+    CONST ORDER_ACCEPTED = "Accepted";
+
     public function customer() {
         return $this->belongsTo('App\Models\Customer');
     }

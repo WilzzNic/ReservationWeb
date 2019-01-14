@@ -18,7 +18,6 @@ class CreateTablesTable extends Migration
             $table->integer('rest_id');
             $table->integer('table_type');
             $table->integer('total_table');
-            $table->integer('total_reserved');
             $table->timestamps();
         });
     }
