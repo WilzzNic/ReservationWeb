@@ -21,6 +21,7 @@ class CreateOrderTable extends Migration
             $table->string('status');
             $table->date('reservation_date');
             $table->dateTime('date_ordered');
+            $table->dateTime('updated_at');
         });
     }
 

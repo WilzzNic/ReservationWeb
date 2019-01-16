@@ -9,6 +9,9 @@ class Order extends Model
     CONST ORDER_PENDING = "Pending";
     CONST ORDER_ACCEPTED = "Accepted";
 
+    const CREATED_AT = 'date_ordered';
+    // const UPDATED_AT = 'updated_at';
+
     public function customer() {
         return $this->belongsTo('App\Models\Customer');
     }

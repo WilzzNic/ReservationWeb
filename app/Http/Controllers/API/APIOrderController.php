@@ -37,8 +37,7 @@ class APIOrderController extends Controller
         }
         else {
             $schedules = Restaurant::find($id)->schedules;
-            $collection = collect(['date', 'time']);
-            $combined = null;
+            $collection = collect();
 
             for($i = 1; $i <= 3; $i++) {
                 foreach($schedules as $schedule) {
@@ -49,20 +48,29 @@ class APIOrderController extends Controller
                             ->count();
 
                     if($modified_sch_count < $total_table) {
-                        $combined = $collection->combine([$modified_date, $schedule->time_provided]); 
+                        $collection->push(['date' => $modified_date, 'time' => $schedule->time_provided]);
                     }
                 }
             }
-            echo $combined;
+
+            return response()->json([
+                'recommended_time' => $collection
+            ], 200);
         }
         
     }
 
-    public function order(Request $request) {
+    public function order(Request $request, $id) {
         $new_order = new Order();
-        $new_order->customer_id = $request->customer_id;
-        $new_order->table_id    = $request->table_id;
-        $new_order->schedule_id = $request->schedule_id;
-        $new_order->status      = Order::ORDER_PENDING;
+        $new_order->customer_id         = $request->customer_id;
+        $new_order->table_id            = $request->table_id;
+        $new_order->schedule_id         = $request->schedule_id;
+        $new_order->status              = Order::ORDER_PENDING;
+        $new_order->reservation_date    = $request->reservation_date;
+        $new_order->save();
+
+        return response()->json([
+            'message' => 'Order saved with ID ' . $new_order->id
+        ], 200);
     }
 }

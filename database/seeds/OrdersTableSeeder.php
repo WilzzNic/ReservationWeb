@@ -21,7 +21,8 @@ class OrdersTableSeeder extends Seeder
                 'schedule_id'       => '2',
                 'status'            => 'Pending',
                 'reservation_date'  => '2019-01-31',
-                'date_ordered'      => Carbon::now()
+                'date_ordered'      => Carbon::now(),
+                'updated_at'        => Carbon::now()
             ],
             [
                 'customer_id'       => '1',
@@ -29,7 +30,17 @@ class OrdersTableSeeder extends Seeder
                 'schedule_id'       => '3',
                 'status'            => 'Pending',
                 'reservation_date'  => '2019-02-01',
-                'date_ordered'      => Carbon::now()
+                'date_ordered'      => Carbon::now(),
+                'updated_at'        => Carbon::now()
+            ],
+            [
+                'customer_id'       => '1',
+                'table_id'          => '2',
+                'schedule_id'       => '2',
+                'status'            => 'Pending',
+                'reservation_date'  => '2019-02-03',
+                'date_ordered'      => Carbon::now(),
+                'updated_at'        => Carbon::now()
             ]
         ]);
     }
