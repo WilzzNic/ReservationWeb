@@ -21,6 +21,8 @@ class CreateRestaurantTable extends Migration
             $table->string('telp_no');
             $table->string('description');
             $table->string('open_time');
+            $table->text('profile_pic')->nullable();
+            $table->text('cover_pic')->nullable();
             $table->timestamps();
         });
     }
