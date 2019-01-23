@@ -10,14 +10,14 @@ use App\Models\User;
 use App\Models\Table;
 use App\Models\Schedule;
 
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
 
 // use Auth;
 
 class APIRestaurantListController extends Controller
 {
     public function index()
-    {   
+    {
         $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic', 'cover_pic')
                                     ->get();
         return response()->json([
@@ -50,7 +50,7 @@ class APIRestaurantListController extends Controller
 
     public function uploadImage(Request $request) {
         $new_restaurant = Restaurant::find(1);
-        
+
         if($request->hasFile('profile_pic')) {
             if($request->profile_pic->isValid()) {
                 $path = $request->profile_pic->store('public/' . auth()->user()->id);
@@ -68,4 +68,6 @@ class APIRestaurantListController extends Controller
 
         // web URL: http://localhost:8000/storage/1/TPS0BXBkwPsL7WQ8SFDV3uP0OLOCvDrLtrTAHN1I.jpeg
     }
+
+
 }

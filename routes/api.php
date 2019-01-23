@@ -26,11 +26,7 @@ Route::group(['middleware' => 'jwt.auth'], function() {
     Route::get('restaurants/{restaurant}', 'API\APIRestaurantListController@restaurantProfile');
     Route::post('restaurants/{restaurant}/checkTable', 'API\APIOrderController@checkAvailability');
     Route::post('restaurants/{restaurant}/order', 'API\APIOrderController@order');
-    Route::post('restaurants/uploadImage', 'API\APIRestaurantListController@uploadImage');
+    // Route::post('restaurants/uploadImage', 'API\APIRestaurantListController@uploadImage');
 });
 
 // Route::resource('restaurants', 'RestaurantListController')->except(['create', 'edit']);
-
-
-
-

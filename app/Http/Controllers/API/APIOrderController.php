@@ -22,12 +22,12 @@ class APIOrderController extends Controller
         $intended_date = $request->intended_date;
 
         $total_table = Table::find($seat_type_id)->total_table;
-        
+
         $scheduled_count = Order::where('schedule_id', $schedule_id)
                             ->where('reservation_date', $intended_date)
                             ->where('status', Order::ORDER_ACCEPTED)
                             ->count();
-        
+
         if($scheduled_count < $total_table) {
             return response()->json([
                 'scheduled_count' => $scheduled_count,
@@ -57,7 +57,7 @@ class APIOrderController extends Controller
                 'recommended_time' => $collection
             ], 200);
         }
-        
+
     }
 
     public function order(Request $request, $id) {
@@ -68,6 +68,13 @@ class APIOrderController extends Controller
         $new_order->status              = Order::ORDER_PENDING;
         $new_order->reservation_date    = $request->reservation_date;
         $new_order->save();
+
+        if(isset($request->foods) != false) {
+          return "Foods is not empty";
+        }
+        else {
+          return "Foods is empty";
+        }
 
         return response()->json([
             'message' => 'Order saved with ID ' . $new_order->id
