@@ -4,8 +4,11 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
 use App\Models\Order;
+use App\Models\FoodOrder;
 use App\Models\Table;
 use App\Models\Restaurant;
 
@@ -60,24 +63,31 @@ class APIOrderController extends Controller
 
     }
 
-    public function order(Request $request, $id) {
-        $new_order = new Order();
-        $new_order->customer_id         = $request->customer_id;
-        $new_order->table_id            = $request->table_id;
-        $new_order->schedule_id         = $request->schedule_id;
-        $new_order->status              = Order::ORDER_PENDING;
-        $new_order->reservation_date    = $request->reservation_date;
-        $new_order->save();
+    public function order(Request $request) {
+        $order_id = DB::transaction(function () use ($request) {
+            $new_order = new Order();
+            $new_order->customer_id         = $request->customer_id;
+            $new_order->table_id            = $request->table_id;
+            $new_order->schedule_id         = $request->schedule_id;
+            $new_order->status              = Order::ORDER_PENDING;
+            $new_order->reservation_date    = $request->reservation_date;
+            $new_order->save();
 
-        if(isset($request->foods) != false) {
-          return "Foods is not empty";
-        }
-        else {
-          return "Foods is empty";
-        }
+            if(isset($request->foods)) {
+                foreach($request->foods as $food) {
+                    $new_food_order = new FoodOrder();
+                    $new_food_order->food_id = $food['food_id'];
+                    $new_food_order->amount  = $food['amount'];
+                    $new_order->foodOrder()->save($new_food_order);
+                }
+
+                return $new_order->id;
+            }
+
+        });
 
         return response()->json([
-            'message' => 'Order saved with ID ' . $new_order->id
+            'message' => 'Order saved with ID ' . $order_id
         ], 200);
     }
 }
