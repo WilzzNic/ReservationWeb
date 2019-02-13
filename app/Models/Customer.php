@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Order;
+
 class Customer extends Model
 {
     public function user() {
@@ -15,6 +17,6 @@ class Customer extends Model
     }
 
     public function history() {
-        return $this->hasMany('App\Models\History');
+        return $this->hasMany('App\Models\Order')->where("status", Order::ORDER_PENDING);
     }
 }

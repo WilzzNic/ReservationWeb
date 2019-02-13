@@ -55,6 +55,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne('App\Models\Customer')->select('id', 'cust_name', 'gender', 'address', 'telp_no');
     }
 
+    public function customera() {
+        return $this->hasOne('App\Models\Customer');
+    }
+
     public function restaurant() {
       return $this->hasOne('App\Models\Restaurant');
     }

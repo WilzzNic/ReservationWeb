@@ -8,6 +8,7 @@ class Order extends Model
 {
     CONST ORDER_PENDING = "Pending";
     CONST ORDER_ACCEPTED = "Accepted";
+    CONST ORDER_COMPLETED = "Completed";
 
     const CREATED_AT = 'date_ordered';
     // const UPDATED_AT = 'updated_at';

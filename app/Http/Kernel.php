@@ -89,6 +89,9 @@ class Kernel extends HttpKernel implements JWTSubject
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
+        'user.admin' => \App\Http\Middleware\CheckAdmin::class,
+        'user.customer' => \App\Http\Middleware\CheckCustomer::class,
+        'user.restaurant' => \App\Http\Middleware\CheckRestaurant::class,
     ];
 
     /**
