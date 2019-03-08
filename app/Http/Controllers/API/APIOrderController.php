@@ -66,7 +66,7 @@ class APIOrderController extends Controller
     public function order(Request $request) {
         $order_id = DB::transaction(function () use ($request) {
             $new_order = new Order();
-            $new_order->customer_id         = $request->customer_id;
+            $new_order->customer_id         = auth()->user()->id;
             $new_order->table_id            = $request->table_id;
             $new_order->schedule_id         = $request->schedule_id;
             $new_order->status              = Order::ORDER_PENDING;

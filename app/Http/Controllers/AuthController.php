@@ -29,7 +29,9 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+        if(Auth::user()->role != "Customer") {
+            return response()->json(['error' => 'Forbidden'], 403);
+        }
         return $this->respondWithToken($token);
     }
 
