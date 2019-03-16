@@ -18,8 +18,8 @@ class APIRestaurantListController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic', 'cover_pic')
-                                    ->get();
+        $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic')
+                                    ->paginate(5);
         return response()->json([
             'restaurants' => $restaurants
         ], 200);

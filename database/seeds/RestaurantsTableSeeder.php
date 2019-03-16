@@ -34,7 +34,48 @@ class RestaurantsTableSeeder extends Seeder
                 'open_time'     => '10:00-23:00',
                 'created_at'    => Carbon::now(),
                 'updated_at'    => Carbon::now()
+            ],
+            [
+                'user_id'       => '5',
+                'rest_name'     => 'Sushi Tei',
+                'address'       => 'Jl. Perintis Kemerdekaan No.1',
+                'telp_no'       => '+0872561221',
+                'description'   => 'Chicken straight from Kentucky.',
+                'open_time'     => '10:00-23:00',
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now()
+            ],
+            [
+                'user_id'       => '6',
+                'rest_name'     => 'Crazy Crab',
+                'address'       => 'Jl. Perintis Kemerdekaan No.1',
+                'telp_no'       => '+0872561221',
+                'description'   => 'Chicken straight from Kentucky.',
+                'open_time'     => '10:00-23:00',
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now()
+            ],
+            [
+                'user_id'       => '7',
+                'rest_name'     => 'Starbucks Coffee',
+                'address'       => 'Jl. Perintis Kemerdekaan No.1',
+                'telp_no'       => '+0872561221',
+                'description'   => 'Chicken straight from Kentucky.',
+                'open_time'     => '10:00-23:00',
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now()
+            ],
+            [
+                'user_id'       => '8',
+                'rest_name'     => 'Maxx Coffee',
+                'address'       => 'Jl. Perintis Kemerdekaan No.1',
+                'telp_no'       => '+0872561221',
+                'description'   => 'Chicken straight from Kentucky.',
+                'open_time'     => '10:00-23:00',
+                'created_at'    => Carbon::now(),
+                'updated_at'    => Carbon::now()
             ]
+            
         ]);
     }
 }

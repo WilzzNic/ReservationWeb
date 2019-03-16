@@ -24,6 +24,7 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 
     Route::group(['middleware' => ['user.customer']], function () {    
         Route::get('profile', 'API\APIProfileController@custProfile');
+        Route::put('profile/edit', 'API\APIProfileController@editCustProfile');
         Route::get('restaurants', 'API\APIRestaurantListController@index');
         Route::get('restaurants/{restaurant}', 'API\APIRestaurantListController@restaurantProfile');
         Route::post('restaurants/{restaurant}/checkTable', 'API\APIOrderController@checkAvailability');

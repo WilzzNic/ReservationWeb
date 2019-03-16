@@ -41,7 +41,36 @@ class UsersTableSeeder extends Seeder
                 'role' => 'Restaurant',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'username' => 'Sushi Tei',
+                'password' => bcrypt('secret'),
+                'role' => 'Restaurant',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'username' => 'Crazy Crab',
+                'password' => bcrypt('secret'),
+                'role' => 'Restaurant',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'username' => 'Starbucks',
+                'password' => bcrypt('secret'),
+                'role' => 'Restaurant',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'username' => 'Maxx Coffee',
+                'password' => bcrypt('secret'),
+                'role' => 'Restaurant',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
+
         ]);
         
     }
