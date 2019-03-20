@@ -16,10 +16,17 @@ use App\Models\Schedule;
 
 class APIRestaurantListController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic')
+        if($request->q == "") {
+            $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic')
                                     ->paginate(5);
+        }
+        else {
+            $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic')
+                            ->where('rest_name', 'LIKE', '%'.$request->q.'%')->paginate(5);
+        }
+
         return response()->json([
             'restaurants' => $restaurants
         ], 200);
