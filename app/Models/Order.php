@@ -18,10 +18,26 @@ class Order extends Model
     }
 
     public function schedule() {
-        return $this->belongsTo('App\Models\Schedule');
+        return $this->belongsTo('App\Models\Schedule', 'schedule_id', 'id');
+    }
+
+    public function table() {
+        return $this->belongsTo('App\Models\Table');
     }
 
     public function foodOrder() {
         return $this->hasMany('App\Models\FoodOrder');
+    }
+
+    public function foods() {
+        return $this->belongsToMany('App\Models\Food', 'food_orders')->withPivot('amount');
+    }
+
+    public function history() {
+        return $this->hasOne('App\Models\History', 'order_id');
+    }
+
+    public function restaurant() {
+        return $this->belongsTo('App\Models\Restaurant', 'rest_id');
     }
 }

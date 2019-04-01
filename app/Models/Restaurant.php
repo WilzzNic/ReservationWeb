@@ -25,4 +25,13 @@ class Restaurant extends Model
     public function schedules() {
         return $this->hasMany('App\Models\Schedule', 'rest_id');
     }
+
+    public function foods() {
+        return $this->hasMany('App\Models\Food', 'rest_id');
+    }
+
+    // Uncomment this if using Table Numbering Function
+    public function orders() {
+        return $this->hasMany('App\Models\Order', 'rest_id');
+    }
 }

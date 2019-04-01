@@ -18,21 +18,24 @@ class TablesTableSeeder extends Seeder
             [
                 'rest_id'           => '1',
                 'table_type'        => 2,
-                'total_table'       => 10,
+                // 'total_table'       => 10,
+                'table_no'       => 1,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
             ],
             [
                 'rest_id'           => '1',
                 'table_type'        => 4,
-                'total_table'       => 5,
+                // 'total_table'       => 5,
+                'table_no'          => 2,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
             ],
             [
                 'rest_id'           => '2',
                 'table_type'        => 4,
-                'total_table'       => 20,
+                // 'total_table'       => 20,
+                'table_no'          => 1,
                 'created_at'        => Carbon::now(),
                 'updated_at'        => Carbon::now()
             ]

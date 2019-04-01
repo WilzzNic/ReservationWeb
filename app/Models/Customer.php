@@ -16,7 +16,7 @@ class Customer extends Model
         return $this->hasMany('App\Models\Order');
     }
 
-    public function history() {
-        return $this->hasMany('App\Models\Order')->where("status", Order::ORDER_PENDING);
-    }
+    // public function history() {
+    //     return $this->hasMany('App\Models\Order')->where("status", Order::ORDER_PENDING);
+    // }
 }

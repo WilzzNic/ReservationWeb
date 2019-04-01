@@ -17,7 +17,13 @@ class CreateTablesTable extends Migration
             $table->increments('id');
             $table->integer('rest_id');
             $table->integer('table_type');
-            $table->integer('total_table');
+
+            // Uncomment this if using Normal Table Quota function
+            // $table->integer('total_table');
+
+            // Uncomment this if using Table Numbering function
+            $table->string('table_no');
+            
             $table->timestamps();
         });
     }

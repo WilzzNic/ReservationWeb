@@ -7,14 +7,23 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Customer;
 use App\Models\User;
+use App\Models\Order;
+use DB;
 
 class APIHistoryController extends Controller
 {
     public function index()
     {
-        $user_history = User::find(auth()->user()->id)->customera->history;
+        // Uncomment this if using Normal Table Function
+        // $orders = Order::where("customer_id", auth()->user()->customera->id)->with(["schedule", "table.restaurant", "foods"])->get();
+
+        // Uncomment this if using Table Numbering Function
+        $orders = Order::where("customer_id", auth()->user()->customera->id)->with(["schedule", "table", "restaurant", "foods"])
+                    ->orderBy('date_ordered', 'desc')
+                    ->get();
+
         return response()->json([
-            "histories" => $user_history
+            "histories" => $orders
         ], 200);
     }
 }

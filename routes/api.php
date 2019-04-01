@@ -31,7 +31,7 @@ Route::group(['middleware' => 'jwt.auth'], function() {
         Route::post('restaurants/{restaurant}/checkTable', 'API\APIOrderController@checkAvailability');
         Route::post('restaurants/order', 'API\APIOrderController@order');
         Route::get('restaurants/{restaurant}/foods', 'API\APIFoodListController@index');
-        Route::get('restaurants/foods/{food}', 'API\APIFoodListController@foodDetails');
+        // Route::get('restaurants/foods/{food}', 'API\APIFoodListController@foodDetails');
         Route::get('history', 'API\APIHistoryController@index');
     });
 

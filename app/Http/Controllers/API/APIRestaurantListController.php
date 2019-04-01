@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use App\Models\User;
 use App\Models\Table;
 use App\Models\Schedule;
+use DB;
 
 // use Illuminate\Support\Facades\Storage;
 
@@ -34,20 +35,25 @@ class APIRestaurantListController extends Controller
 
     public function restaurantProfile($id){
         $new_restaurant = Restaurant::find($id);
-        $tables = $new_restaurant->tables;
+
+        // Uncomment below code for normal quota function
+        // $tables = $new_restaurant->tables;
+
+        $tables = DB::table('tables')->select('table_type')->where('rest_id', $id)->distinct()->get();
+        
         $schedules = $new_restaurant->schedules;
+        $number_of_foods = count($new_restaurant->foods);
 
         return response()->json([
-            'restaurant' => [
-                'id'            => $new_restaurant->id,
-                'rest_name'     => $new_restaurant->rest_name,
-                'address'       => $new_restaurant->address,
-                'telp_no'       => $new_restaurant->telp_no,
-                'description'   => $new_restaurant->description,
-                'open_time'     => $new_restaurant->open_time,
-                'profile_pic'   => $new_restaurant->profile_pic,
-                'cover_pic'     => $new_restaurant->cover_pic
-            ],
+            'id'            => $new_restaurant->id,
+            'rest_name'     => $new_restaurant->rest_name,
+            'address'       => $new_restaurant->address,
+            'telp_no'       => $new_restaurant->telp_no,
+            'description'   => $new_restaurant->description,
+            'open_time'     => $new_restaurant->open_time,
+            'profile_pic'   => $new_restaurant->profile_pic,
+            'cover_pic'     => $new_restaurant->cover_pic,
+            'number_of_foods' => $number_of_foods,
             'seat_type' => $tables,
             'time_type' => $schedules
         ], 200);
@@ -61,7 +67,7 @@ class APIRestaurantListController extends Controller
         if($request->hasFile('profile_pic')) {
             if($request->profile_pic->isValid()) {
                 $path = $request->profile_pic->store('public/' . auth()->user()->id);
-                $new_restaurant->profile_pic = $request->profile_pic->hashName();
+                $new_restaurant->profile_pic = auth()->user()->id . '/'. $request->profile_pic->hashName();
                 $new_restaurant->save();
 
                 $url = asset('storage/' . auth()->user()->id . '/' . $request->profile_pic->hashName());
