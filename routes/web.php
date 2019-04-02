@@ -11,16 +11,35 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('', 'Auth\LoginController@showLoginForm')->name('login');
+
+Route::post('', 'Auth\LoginController@login');
+
+Route::post('/authenticate', 'LoginController@authenticate')->name('try');
+
+Route::middleware(['auth:web'])->group(function() {
+    Route::middleware('can:Admin')->prefix('admin')->group(function() {
+        Route::resource('restaurants', 'Admin\RestaurantsController');
+        Route::get('data/restaurants', 'Admin\RestaurantsController@dataRestaurants')->name('restaurantdata');
+    });
+
+    Route::middleware('can:Restaurant')->prefix('restaurant')->group(function() {
+        Route::resource('reservations', 'Restaurant\ReservationsController');
+    });
 });
 
-Route::get('/test', function() {
-    return view('test');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('test', function() {
+    dd(Auth::guard('web')->user()->username);
 });
 
-Route::post('/testC', 'API\APIOrderController@index')->name('testC');
+// Route::get('/test', function() {
+//     return view('test');
+// });
 
-Auth::routes();
+// Route::post('/testC', 'API\APIOrderController@index')->name('testC');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

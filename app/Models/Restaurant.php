@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function tables() {
         return $this->hasMany('App\Models\Table', 'rest_id');
     }

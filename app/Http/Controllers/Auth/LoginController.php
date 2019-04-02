@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/restaurants';
 
     /**
      * Create a new controller instance.
@@ -35,5 +37,34 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function username() {
+        return 'username';
+    }
+
+    public function login(Request $request) {
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        // Attempt to log the user in
+        if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+            // if successful, then redirect to their intended location
+            if (Auth::guard('web')->user()->role == 'Admin') {
+                return redirect()->intended('/admin/restaurants');
+            }
+            else if (Auth::guard('web')->user()->role == 'Restaurant') {
+                return redirect()->intended('restaurant/reservations');
+            }
+            else {
+                return back();
+            }
+
+
+        }
+        // if unsuccessful, then redirect back to the login with the form data
+        // return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 }
