@@ -23,6 +23,8 @@ Route::middleware(['auth:web'])->group(function() {
         Route::get('data/restaurants', 'Admin\RestaurantsController@dataRestaurants')->name('restaurantdata');
         Route::resource('schedules', 'Admin\SchedulesController');
         Route::get('data/schedules', 'Admin\SchedulesController@dataSchedules')->name('scheduledata');
+        Route::resource('tables', 'Admin\TablesController');
+        Route::get('data/tables', 'Admin\TablesController@dataTables')->name('tabledata');
     });
 
     Route::middleware('can:Restaurant')->prefix('restaurant')->group(function() {
@@ -34,9 +36,9 @@ Route::middleware(['auth:web'])->group(function() {
 
 // Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('test', function() {
-    dd(Auth::guard('web')->user()->username);
-});
+// Route::get('test', function() {
+//     dd(Auth::guard('web')->user()->username);
+// });
 
 // Route::get('/test', function() {
 //     return view('test');

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Schedule')
+@section('title', 'Edit Schedule')
 
 @section('content_header')
-<h1>Add Schedule</h1>
+<h1>Edit Schedule</h1>
 @stop
 
 @section('content')
@@ -44,25 +44,4 @@
         </div>
     </div>
 </div>
-@stop
-
-@section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
-<style>
-    .select2 {
-        width:100%!important;
-    }
-    input[type=time] {
-        margin: 1px;
-        min-width: 50px;
-    }
-</style>
-@stop
-
-@section('js')
-<script type="text/javascript ">
-    $(document).ready(function () {
-        $('.select2').select2();
-    });
-</script>
 @stop
