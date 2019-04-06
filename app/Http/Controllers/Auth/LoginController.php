@@ -43,9 +43,13 @@ class LoginController extends Controller
         return 'username';
     }
 
+    protected function guard() {
+        return Auth::guard('web');
+    }
+    
     public function login(Request $request) {
         $this->validate($request, [
-            'username' => 'required',
+            'username' => 'required|exists:users',
             'password' => 'required'
         ]);
 
@@ -59,10 +63,11 @@ class LoginController extends Controller
                 return redirect()->intended('restaurant/reservations');
             }
             else {
-                return back();
+                return redirect()->back();
             }
-
-
+        }
+        else {
+            return redirect()->back();
         }
         // if unsuccessful, then redirect back to the login with the form data
         // return redirect()->back()->withInput($request->only('email', 'remember'));

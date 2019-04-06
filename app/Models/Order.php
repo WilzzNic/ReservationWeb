@@ -29,8 +29,12 @@ class Order extends Model
         return $this->hasMany('App\Models\FoodOrder');
     }
 
+    // public function foods() {
+    //     return $this->belongsToMany('App\Models\Food', 'food_orders')->withPivot('amount');
+    // }
+
     public function foods() {
-        return $this->belongsToMany('App\Models\Food', 'food_orders')->withPivot('amount');
+        return $this->belongsToMany('App\Models\Food', 'food_orders')->withPivot('amount')->withTrashed();
     }
 
     public function history() {

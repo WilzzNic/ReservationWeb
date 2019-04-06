@@ -25,6 +25,7 @@ class CreateTablesTable extends Migration
             $table->string('table_no');
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

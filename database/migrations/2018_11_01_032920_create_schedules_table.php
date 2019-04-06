@@ -18,6 +18,7 @@ class CreateSchedulesTable extends Migration
             $table->integer('rest_id');
             $table->time('time_provided');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

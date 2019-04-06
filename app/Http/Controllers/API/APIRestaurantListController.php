@@ -79,7 +79,7 @@ class APIRestaurantListController extends Controller
             }
         }
 
-        // web URL: http://localhost:8000/storage/1/TPS0BXBkwPsL7WQ8SFDV3uP0OLOCvDrLtrTAHN1I.jpeg
+        // web URL: http://localhost:8000/storage/1/EGzlev1znilSWVV6slA2oRZCxt85VouxByYE2vFO.png
     }
 
 

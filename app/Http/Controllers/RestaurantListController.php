@@ -64,8 +64,7 @@ class RestaurantListController extends Controller
             'telp_no.required'      => 'Telephone No. must not be empty.',
             'description.required'  => 'Description must not be empty.',
             'open_time.required'    => 'Open Time must not be empty.'
-        ]
-    );
+        ]);
 
         $new_user = new User();
         $new_user->username             =   $request->username;

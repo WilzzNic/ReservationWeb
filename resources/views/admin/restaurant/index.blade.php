@@ -5,7 +5,7 @@
 @section('content_header')
 <h1>
     Restaurant List
-    <a type="button" class='btn btn-success pull-right' href="restaurants/create">
+    <a type="button" class='btn btn-success pull-right' href="{{ route('restaurants.create') }}">
         <i class='fa fa-plus'></i> &nbsp; Add Restaurant
     </a>
 </h1>

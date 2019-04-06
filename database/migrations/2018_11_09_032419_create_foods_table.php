@@ -21,6 +21,7 @@ class CreateFoodsTable extends Migration
             $table->double('price', 12, 2)->unsigned();
             $table->text('food_pic')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

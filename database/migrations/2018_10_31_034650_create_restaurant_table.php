@@ -24,6 +24,7 @@ class CreateRestaurantTable extends Migration
             $table->text('profile_pic')->nullable();
             $table->text('cover_pic')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateFoodOrdersTable extends Migration
           $table->integer('food_id');
           $table->integer('amount')->unsigned();
           $table->timestamps();
+          $table->softDeletes();
         });
     }
 

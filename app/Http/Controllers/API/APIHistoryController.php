@@ -18,7 +18,19 @@ class APIHistoryController extends Controller
         // $orders = Order::where("customer_id", auth()->user()->customera->id)->with(["schedule", "table.restaurant", "foods"])->get();
 
         // Uncomment this if using Table Numbering Function
-        $orders = Order::where("customer_id", auth()->user()->customera->id)->with(["schedule", "table", "restaurant", "foods"])
+        $orders = Order::where("customer_id", auth()->user()->customera->id)
+                    ->with(["schedule" => function($query) {
+                        $query->withTrashed();
+                    },
+                    "table" => function($query) {
+                        $query->withTrashed();
+                    },
+                    "restaurant" => function($query) {
+                        $query->withTrashed();
+                    },
+                    "foods" => function($query) {
+                        $query->withTrashed();
+                    }])
                     ->orderBy('date_ordered', 'desc')
                     ->get();
 

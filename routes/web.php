@@ -21,14 +21,18 @@ Route::middleware(['auth:web'])->group(function() {
     Route::middleware('can:Admin')->prefix('admin')->group(function() {
         Route::resource('restaurants', 'Admin\RestaurantsController');
         Route::get('data/restaurants', 'Admin\RestaurantsController@dataRestaurants')->name('restaurantdata');
+        Route::resource('schedules', 'Admin\SchedulesController');
+        Route::get('data/schedules', 'Admin\SchedulesController@dataSchedules')->name('scheduledata');
     });
 
     Route::middleware('can:Restaurant')->prefix('restaurant')->group(function() {
         Route::resource('reservations', 'Restaurant\ReservationsController');
     });
+
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 });
 
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('test', function() {
     dd(Auth::guard('web')->user()->username);
