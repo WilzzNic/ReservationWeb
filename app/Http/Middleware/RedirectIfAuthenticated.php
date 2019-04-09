@@ -16,9 +16,16 @@ class RedirectIfAuthenticated
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
-    {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+    {   
+        $guard = Auth::guard($guard);
+        if ($guard->check()) {
+            if($guard->user()->role == 'Admin') {
+                return redirect('admin/restaurants');
+            } else if($guard->user()->role == 'Restaurant') {
+                return redirect('restaurant/reservations');
+            } else {
+                return redirect('/');
+            }
         }
 
         return $next($request);

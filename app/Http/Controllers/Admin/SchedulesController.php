@@ -133,11 +133,6 @@ class SchedulesController extends Controller
         ->addColumn('action', function ($schedules) {
             return 
                 '<div class="col-md-1 col-xs-12">
-                    <a class="btn btn-xs btn-primary" href="'.route("schedules.edit", ['id' => $schedules->id]).'">'
-                    .'<i class="glyphicon glyphicon-edit"></i> Edit</a>'
-                .'</div>'
-
-                .'<div class="col-md-1 col-xs-12">
                     <form method="POST" action='.route("schedules.destroy", ['id' => $schedules->id]).'>    
                         <input type="hidden" name="_token" value='.csrf_token().'>
                         <input type="hidden" name="_method" value="DELETE">
@@ -147,5 +142,24 @@ class SchedulesController extends Controller
                 .'</div>';
         })
         ->make(true);
+
+        // return Datatables::of($schedules)
+        // ->addColumn('action', function ($schedules) {
+        //     return 
+        //         '<div class="col-md-1 col-xs-12">
+        //             <a class="btn btn-xs btn-primary" href="'.route("schedules.edit", ['id' => $schedules->id]).'">'
+        //             .'<i class="glyphicon glyphicon-edit"></i> Edit</a>'
+        //         .'</div>'
+
+        //         .'<div class="col-md-1 col-xs-12">
+        //             <form method="POST" action='.route("schedules.destroy", ['id' => $schedules->id]).'>    
+        //                 <input type="hidden" name="_token" value='.csrf_token().'>
+        //                 <input type="hidden" name="_method" value="DELETE">
+        //                 <button class="btn btn-xs btn-danger">'
+        //                 .'<i class="glyphicon glyphicon-trash"></i> Delete</button></div>'
+        //             .'</form>'
+        //         .'</div>';
+        // })
+        // ->make(true);
     }
 }

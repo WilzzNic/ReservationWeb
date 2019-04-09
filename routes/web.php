@@ -28,7 +28,11 @@ Route::middleware(['auth:web'])->group(function() {
     });
 
     Route::middleware('can:Restaurant')->prefix('restaurant')->group(function() {
-        Route::resource('reservations', 'Restaurant\ReservationsController');
+        Route::get('reservations', 'Restaurant\ReservationsController@index')->name('reservations.pending');
+        Route::get('reservations/{id}/assign', 'Restaurant\ReservationsController@assign')->name('reservations.assign');
+        Route::post('reservations/{id}/reject', 'Restaurant\ReservationsController@reject')->name('reservations.reject');
+        Route::get('reservations/{id}/details', 'Restaurant\ReservationsController@details')->name('reservations.details');
+        Route::get('data/reservations', 'Restaurant\ReservationsController@dataOrders')->name('ordersdata');
     });
 
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');

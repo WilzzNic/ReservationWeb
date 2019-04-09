@@ -22,7 +22,7 @@ class Order extends Model
     }
 
     public function table() {
-        return $this->belongsTo('App\Models\Table');
+        return $this->belongsTo('App\Models\Table')->withTrashed();
     }
 
     public function foodOrder() {

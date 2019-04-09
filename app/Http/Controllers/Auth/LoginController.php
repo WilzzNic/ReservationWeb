@@ -36,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:web')->except('logout');
     }
 
     public function username() {
@@ -57,7 +57,7 @@ class LoginController extends Controller
         if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
             // if successful, then redirect to their intended location
             if (Auth::guard('web')->user()->role == 'Admin') {
-                return redirect()->intended('/admin/restaurants');
+                return redirect()->intended('admin/restaurants');
             }
             else if (Auth::guard('web')->user()->role == 'Restaurant') {
                 return redirect()->intended('restaurant/reservations');

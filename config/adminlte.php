@@ -129,7 +129,33 @@ return [
             'url'  => 'admin/tables',
             'icon' => 'list-ol',
             'can'  => 'Admin',
-        ]
+        ],
+        [
+            'header' => 'MANAGE RESERVATIONS',
+            'can'    => 'Restaurant'
+        ],
+        [
+            'text' => 'Ongoing Reservations',
+            'url'  => 'restaurant/reservations',
+            'icon' => 'address-book-o',
+            'can'  => 'Restaurant',
+        ],
+        [
+            'header' => 'MANAGE YOUR RESTAURANT',
+            'can'    => 'Restaurant'
+        ],
+        [
+            'text' => 'Profile',
+            'url'  => 'restaurant/profile',
+            'icon' => 'address-card-o',
+            'can'  => 'Restaurant',
+        ],
+        [
+            'text' => 'Manage Foods',
+            'url'  => 'restaurant/foods',
+            'icon' => 'cutlery',
+            'can'  => 'Restaurant',
+        ],
 
         // [
         //     'text'        => 'Pages',

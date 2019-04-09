@@ -136,15 +136,11 @@ class TablesController extends Controller
 
     public function dataTables() {
         $tables = Table::get()->load(['restaurant']);
+
         return Datatables::of($tables)
         ->addColumn('action', function ($tables) {
             return 
-                '<div class="col-md-1 col-xs-12" style="margin-right:5px;">
-                    <a class="btn btn-xs btn-primary" href="'.route("tables.edit", ['id' => $tables->id]).'">'
-                    .'<i class="glyphicon glyphicon-edit"></i> Edit</a>'
-                .'</div>'
-
-                .'<div class="col-md-1 col-xs-12">
+                '<div class="col-md-1 col-xs-12">
                     <form method="POST" action='.route("tables.destroy", ['id' => $tables->id]).'>    
                         <input type="hidden" name="_token" value='.csrf_token().'>
                         <input type="hidden" name="_method" value="DELETE">
@@ -154,5 +150,24 @@ class TablesController extends Controller
                 .'</div>';
         })
         ->make(true);
+
+        // return Datatables::of($tables)
+        // ->addColumn('action', function ($tables) {
+        //     return 
+        //         '<div class="col-md-1 col-xs-12" style="margin-right:5px;">
+        //             <a class="btn btn-xs btn-primary" href="'.route("tables.edit", ['id' => $tables->id]).'">'
+        //             .'<i class="glyphicon glyphicon-edit"></i> Edit</a>'
+        //         .'</div>'
+
+        //         .'<div class="col-md-1 col-xs-12">
+        //             <form method="POST" action='.route("tables.destroy", ['id' => $tables->id]).'>    
+        //                 <input type="hidden" name="_token" value='.csrf_token().'>
+        //                 <input type="hidden" name="_method" value="DELETE">
+        //                 <button class="btn btn-xs btn-danger">'
+        //                 .'<i class="glyphicon glyphicon-trash"></i> Delete</button></div>'
+        //             .'</form>'
+        //         .'</div>';
+        // })
+        // ->make(true);
     }
 }

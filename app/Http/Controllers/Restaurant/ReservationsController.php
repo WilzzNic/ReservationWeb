@@ -5,81 +5,65 @@ namespace App\Http\Controllers\Restaurant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Auth;
+use Carbon\Carbon;
+use Yajra\Datatables\Datatables;
+
+use App\Models\Order;
+
 class ReservationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('restaurant.reservations');
+    public function index() {
+        return view('restaurant.reservation.reservations');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function assign() {
+        return view('restaurant.reservation.assign');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function reject() {
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function details() {
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function dataOrders() {
+        $id = Auth::guard('web')->user()->restaurant->id;
+        $orders = Order::where('rest_id', $id)
+                        ->where('status', Order::ORDER_PENDING)
+                        ->orWhere('status', Order::ORDER_ACCEPTED)
+                        ->orderByRaw("FIELD(status , 'Pending', 'Accepted') ASC")
+                        ->get()
+                        ->load(['customer', 'schedule', 'foods', 'table']);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        return Datatables::of($orders)
+            ->addColumn('action', function ($orders) {
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+                $unassigned_order_buttons = '<span style="display:inline-block;">
+                                            <a class="btn btn-xs btn-primary" href="'.route("reservations.assign", ['id' => $orders->id]).'">'
+                                                .'<i class="glyphicon glyphicon-edit"></i> Assign
+                                            </a></span>&nbsp;'
+                                            .'<span style="display:inline-block;">
+                                            <form method="POST" action='.route("reservations.reject", ['id' => $orders->id]).'>    
+                                                <input type="hidden" name="_token" value='.csrf_token().'>
+                                                <button class="btn btn-xs btn-danger">'
+                                                .'<i class="fa fa-close"></i> Reject</button></div>'
+                                            .'</form></span>';
+
+                $assigned_order_buttons = '<span style="display:inline-block;">
+                                                <a class="btn btn-xs btn-primary" href="'.route("reservations.assign", ['id' => $orders->id]).'">'
+                                                .'<i class="glyphicon glyphicon-edit"></i> Resssign</a>'
+                                            .'</div></span>';
+
+                if($orders->status == Order::ORDER_PENDING) {
+                    return $unassigned_order_buttons;
+                }
+                else {
+                    return $assigned_order_buttons;
+                }
+
+        })->make(true);
     }
 }
