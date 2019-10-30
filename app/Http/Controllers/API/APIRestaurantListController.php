@@ -19,6 +19,8 @@ class APIRestaurantListController extends Controller
 {
     public function index(Request $request)
     {
+        // Test webhooks
+
         if($request->q == "") {
             $restaurants = Restaurant::select('id','rest_name','address','telp_no', 'description', 'open_time', 'profile_pic')
                                     ->paginate(5);
